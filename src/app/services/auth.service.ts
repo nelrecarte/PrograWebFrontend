@@ -13,7 +13,6 @@ export class AuthService {
   private http = inject(HttpClient);
   private apiUrl = environment.apiUrl;
 
-  // Usuario en sesión. Es signal para que el navbar se actualice solo.
   user = signal<UserProfile | null>(this.readUser());
 
   login(data: LoginRequest): Observable<UserProfile> {
@@ -30,7 +29,10 @@ export class AuthService {
     );
   }
 
-  // Se llama después del login porque el perfil trae el rol real del usuario.
+  forgotPassword(email: string): Observable<{ mensaje: string }> {
+    return this.http.post<{ mensaje: string }>(this.apiUrl + '/auth/forgot-password', { email });
+  }
+
   loadProfile(): Observable<UserProfile> {
     return this.http.get<UserProfile>(this.apiUrl + '/users/me').pipe(
       tap((profile) => {
@@ -70,7 +72,6 @@ export class AuthService {
     return this.user()?.displayName || this.user()?.email || '';
   }
 
-  // A qué pantalla mandar a cada rol después de iniciar sesión
   homeFor(role: Role): string {
     if (role === 'Administrador') {
       return '/admin';

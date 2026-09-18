@@ -29,7 +29,6 @@ export class ZonesService {
     return this.http.put<Zone>(this.apiUrl + '/zones/' + id, data);
   }
 
-  // Baja lógica: la zona se queda con su historial
   delete(id: string): Observable<void> {
     return this.http.delete<void>(this.apiUrl + '/zones/' + id);
   }

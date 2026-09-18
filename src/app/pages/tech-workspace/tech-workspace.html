@@ -1,0 +1,75 @@
+@if (loading()) {
+  <p class="py-10 text-center text-sm text-slate-500">Cargando…</p>
+} @else if (errorMessage()) {
+  <div class="mx-auto max-w-lg rounded-xl border border-slate-200 bg-white p-8 text-center">
+    <p class="font-medium text-slate-900">{{ errorMessage() }}</p>
+    <p class="mt-2 text-sm text-slate-600">
+      Si un administrador te acaba de registrar como técnico, cerrá sesión y volvé a entrar.
+    </p>
+  </div>
+} @else if (technician(); as tech) {
+  <section class="mb-8 flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-slate-900">{{ tech.fullName }}</h1>
+      <p class="mt-1 text-sm text-slate-600">
+        Zona <span class="font-medium text-slate-900">{{ tech.zoneName }}</span> ·
+        {{ assigned().length }} asignados ·
+        {{ tech.isAvailable ? 'Disponible' : 'No disponible' }}
+      </p>
+    </div>
+  </section>
+
+  <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
+    Sin asignar en tu zona ({{ unassigned().length }})
+  </h2>
+
+  @if (unassigned().length === 0) {
+    <div class="rounded-xl border border-dashed border-slate-300 bg-white px-6 py-8 text-center">
+      <p class="text-sm text-slate-600">No hay cortes esperando técnico en tu zona.</p>
+    </div>
+  } @else {
+    <div class="divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white">
+      @for (report of unassigned(); track report.id) {
+        <div class="flex flex-wrap items-center gap-3 p-4">
+          <div class="min-w-0 flex-1">
+            <p class="truncate font-medium text-slate-900">{{ report.address }}</p>
+            <p class="text-xs text-slate-500">
+              {{ report.confirmationCount }} vecinos confirmaron
+            </p>
+          </div>
+          <app-status-badge [status]="report.status" />
+          <a
+            [routerLink]="['/reportes', report.id]"
+            class="rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
+          >
+            Ver
+          </a>
+          <button
+            type="button"
+            [disabled]="saving()"
+            (click)="take(report)"
+            class="rounded-lg bg-slate-900 px-3 py-1.5 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-60"
+          >
+            Tomar
+          </button>
+        </div>
+      }
+    </div>
+  }
+
+  <h2 class="mb-3 mt-8 text-sm font-semibold uppercase tracking-wide text-slate-500">
+    Asignados a vos ({{ assigned().length }})
+  </h2>
+
+  @if (assigned().length === 0) {
+    <div class="rounded-xl border border-dashed border-slate-300 bg-white px-6 py-8 text-center">
+      <p class="text-sm text-slate-600">Todavía no tenés reportes asignados.</p>
+    </div>
+  } @else {
+    <div class="grid gap-4 sm:grid-cols-2">
+      @for (report of assigned(); track report.id) {
+        <app-report-card [report]="report" [allowConfirm]="false" />
+      }
+    </div>
+  }
+}

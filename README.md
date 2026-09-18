@@ -35,12 +35,11 @@ La primera vez hay que crear las zonas y hacerse administrador. Los comandos est
 ```
 src/app/
   models/       interfaces de lo que manda y devuelve el backend
-  services/     un servicio por cada parte de la API
-  guards/       protegen las rutas segun la sesion y el rol
+  services/     un servicio por cada parte de la API, mas los guards de rutas
   interceptors/ le pone el token a las peticiones
   shared/       componentes que se usan en varias pantallas
   layout/       el navbar
-  pages/        una pantalla por archivo
+  pages/        una carpeta por pantalla: nombre.ts + nombre.html + nombre.css
 ```
 
 ## Cosas que hay que saber antes de programar
@@ -60,7 +59,7 @@ error: (err) => this.toast.error(err.error?.error ?? 'Mensaje por si acaso.'),
 
 El caso especial es crear un reporte: si la zona ya tiene un corte abierto, el backend responde
 409 con `code: 'reporte_duplicado'` y en `data` viene el id del reporte que ya existe, para
-ofrecer confirmarlo. Está resuelto en `pages/report-create.component.ts`.
+ofrecer confirmarlo. Está resuelto en `pages/report-create/report-create.ts`.
 
 **Las fechas.** El backend toma como UTC cualquier fecha que llegue sin zona horaria, así que lo
 que sale de un input hay que pasarlo por las funciones de `shared/date-utils.ts`.
@@ -79,7 +78,7 @@ crear un reporte y el detalle con las acciones de cada rol.
 - Pantalla del técnico
 
 Los servicios de todo eso ya están hechos (`statistics.service.ts`, `technicians.service.ts`,
-`users.service.ts`), así que para agregar una pantalla hay que crear el componente en `pages/`
+`users.service.ts`), así que para agregar una pantalla hay que crear la carpeta del componente en `pages/`
 y registrar la ruta en `app.routes.ts`. Ahí quedó un ejemplo comentado de cómo usar el guard
 de administrador.
 
