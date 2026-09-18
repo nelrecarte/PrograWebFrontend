@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { NotificationBellComponent } from '../../shared/notification-bell/notification-bell';
 
 interface NavLink {
   path: string;
@@ -9,7 +10,7 @@ interface NavLink {
 
 @Component({
   selector: 'app-main-layout',
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, NotificationBellComponent],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.css',
 })

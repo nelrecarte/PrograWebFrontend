@@ -101,14 +101,19 @@
 
       <label class="block text-sm">
         <span class="mb-1 block font-medium text-slate-700">
-          Enlace a una foto <span class="font-normal text-slate-400">(opcional)</span>
+          Foto del corte <span class="font-normal text-slate-400">(opcional)</span>
         </span>
         <input
           formControlName="evidenceUrl"
           placeholder="https://…"
           class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
         />
+        <span class="mt-1 block text-xs text-slate-500">
+          Pegá el enlace de una foto ya subida. Subir el archivo desde acá necesita Firebase
+          Storage, que requiere una cuenta de pago.
+        </span>
       </label>
+
 
       <div class="flex gap-3 pt-2">
         <button

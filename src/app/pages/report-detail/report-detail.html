@@ -41,9 +41,13 @@
           @if (r.evidenceUrl) {
             <div class="sm:col-span-2">
               <dt class="text-slate-500">Evidencia</dt>
-              <dd>
-                <a [href]="r.evidenceUrl" target="_blank" rel="noopener" class="text-brand-700 underline">
-                  Abrir enlace
+              <dd class="mt-1">
+                <a [href]="r.evidenceUrl" target="_blank" rel="noopener">
+                  <img
+                    [src]="r.evidenceUrl"
+                    alt="Foto del corte reportado"
+                    class="max-h-56 rounded-lg border border-slate-200"
+                  />
                 </a>
               </dd>
             </div>

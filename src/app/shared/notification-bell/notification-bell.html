@@ -1,0 +1,51 @@
+<div class="relative">
+  <button
+    type="button"
+    (click)="alternar()"
+    class="relative grid h-9 w-9 place-items-center rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-100"
+    [attr.aria-label]="'Notificaciones, ' + sinLeer() + ' sin leer'"
+  >
+    🔔
+    @if (sinLeer() > 0) {
+      <span class="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-red-600 px-1 text-[11px] font-bold text-white">
+        {{ sinLeer() > 9 ? '9+' : sinLeer() }}
+      </span>
+    }
+  </button>
+
+  @if (abierto()) {
+    <div class="absolute right-0 z-50 mt-2 w-80 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg">
+      <div class="flex items-center justify-between border-b border-slate-100 px-4 py-3">
+        <span class="text-sm font-semibold text-slate-900">Notificaciones</span>
+        @if (sinLeer() > 0) {
+          <button type="button" (click)="marcarTodas()" class="text-xs text-brand-700 hover:underline">
+            Marcar todas
+          </button>
+        }
+      </div>
+
+      @if (cargando()) {
+        <p class="px-4 py-8 text-center text-sm text-slate-500">Cargando…</p>
+      } @else if (items().length === 0) {
+        <p class="px-4 py-8 text-center text-sm text-slate-500">No tenés notificaciones.</p>
+      } @else {
+        <ul class="max-h-96 divide-y divide-slate-100 overflow-y-auto">
+          @for (n of items(); track n.id) {
+            <li>
+              <button
+                type="button"
+                (click)="abrir(n)"
+                class="w-full px-4 py-3 text-left hover:bg-slate-50"
+                [class]="n.isRead ? '' : 'bg-amber-50'"
+              >
+                <p class="text-sm font-medium text-slate-900">{{ n.title }}</p>
+                <p class="mt-0.5 text-xs text-slate-600">{{ n.message }}</p>
+                <p class="mt-1 text-[11px] text-slate-400">{{ n.zoneName }}</p>
+              </button>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+  }
+</div>
