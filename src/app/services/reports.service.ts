@@ -23,6 +23,9 @@ export class ReportsService {
     if (filters.status) {
       params = params.set('status', filters.status);
     }
+    if (filters.technicianId) {
+      params = params.set('technicianId', filters.technicianId);
+    }
     if (filters.isActive !== undefined) {
       params = params.set('isActive', filters.isActive);
     }
@@ -37,12 +40,10 @@ export class ReportsService {
     return this.http.get<Report>(this.apiUrl + '/reports/' + id);
   }
 
-  // Puede devolver 409 reporte_duplicado si la zona ya tiene un corte abierto
   create(data: CreateReportRequest): Observable<Report> {
     return this.http.post<Report>(this.apiUrl + '/reports', data);
   }
 
-  // "A mí también me afecta"
   confirm(id: string): Observable<Report> {
     return this.http.post<Report>(this.apiUrl + '/reports/' + id + '/confirm', {});
   }
@@ -59,7 +60,6 @@ export class ReportsService {
     return this.http.patch<Report>(this.apiUrl + '/reports/' + id + '/status', { status });
   }
 
-  // Cierra el corte. Una resolución registrada ya no se puede cambiar.
   resolve(id: string, data: CreateResolutionRequest): Observable<Resolution> {
     return this.http.post<Resolution>(this.apiUrl + '/reports/' + id + '/resolution', data);
   }

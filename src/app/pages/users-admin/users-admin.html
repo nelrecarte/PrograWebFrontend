@@ -1,0 +1,57 @@
+<section class="users-admin">
+  <h1>Usuarios</h1>
+
+  <label class="filtro">
+    Filtrar por rol
+    <select [ngModel]="rolFiltro()" (ngModelChange)="filtrar($event)">
+      <option value="">Todos</option>
+      @for (role of roles; track role) {
+        <option [value]="role">{{ role }}</option>
+      }
+    </select>
+  </label>
+
+  @if (error()) {
+    <p class="form-error">{{ error() }}</p>
+  }
+
+  @if (loading()) {
+    <p>Cargando usuarios...</p>
+  } @else if (usuarios().length === 0) {
+    <p>No hay usuarios con ese rol.</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Rol</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (usuario of usuarios(); track usuario.id) {
+          <tr>
+            <td>{{ usuario.displayName }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>
+              <select
+                [ngModel]="usuario.role"
+                [disabled]="guardandoId() === usuario.id"
+                (ngModelChange)="cambiarRol(usuario, $event)"
+              >
+                @for (role of roles; track role) {
+                  <option [value]="role">{{ role }}</option>
+                }
+              </select>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <p class="aviso">
+      El cambio de rol no se refleja al instante para esa persona: viaja
+      dentro de su sesión, así que lo va a ver recién cuando cierre
+      sesión y vuelva a entrar.
+    </p>
+  }
+</section>

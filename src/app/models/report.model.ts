@@ -37,7 +37,6 @@ export interface Report {
   createdAt: string;
   updatedAt: string;
   resolvedAt: string | null;
-  // true si el usuario que pide ya confirmó este reporte
   confirmedByMe: boolean;
   resolution: Resolution | null;
 }
@@ -59,10 +58,10 @@ export interface CreateResolutionRequest {
 export interface ReportFilters {
   zoneId?: string;
   status?: string;
+  technicianId?: string;
   isActive?: boolean;
 }
 
-// Lo que trae el "data" del error 409 reporte_duplicado
 export interface DuplicateReportData {
   existingReportId: string;
   zoneId: string;

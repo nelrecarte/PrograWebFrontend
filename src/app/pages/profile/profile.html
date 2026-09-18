@@ -1,0 +1,47 @@
+<section class="profile">
+  <h1>Mi perfil</h1>
+
+  @if (loading()) {
+    <p>Cargando perfil...</p>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+      @if (error()) {
+        <p class="form-error">{{ error() }}</p>
+      }
+
+      <label>
+        Nombre
+        <input type="text" formControlName="displayName" />
+      </label>
+
+      <label>
+        Teléfono
+        <input type="text" formControlName="phoneNumber" />
+      </label>
+
+      <label>
+        País
+        <input type="text" formControlName="country" />
+      </label>
+
+      <label>
+        Bio
+        <textarea formControlName="bio" rows="3"></textarea>
+      </label>
+
+      <label>
+        Zona
+        <select formControlName="zoneId">
+          <option value="" disabled>Elegí tu zona</option>
+          @for (zone of zones(); track zone.id) {
+            <option [value]="zone.id">{{ zone.name }}</option>
+          }
+        </select>
+      </label>
+
+      <button type="submit" [disabled]="form.invalid || saving()">
+        {{ saving() ? 'Guardando...' : 'Guardar cambios' }}
+      </button>
+    </form>
+  }
+</section>

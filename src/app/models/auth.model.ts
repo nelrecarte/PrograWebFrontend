@@ -1,6 +1,5 @@
 export type Role = 'Administrador' | 'Tecnico' | 'Ciudadano';
 
-// Lo que devuelven /api/auth/login y /api/auth/register
 export interface AuthResponse {
   idToken: string;
   localId: string;

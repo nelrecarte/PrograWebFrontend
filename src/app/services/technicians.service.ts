@@ -21,7 +21,6 @@ export class TechniciansService {
     return this.http.get<Technician>(this.apiUrl + '/technicians/me');
   }
 
-  // Además de crear la ficha, sube al usuario al rol Tecnico
   create(data: CreateTechnicianRequest): Observable<Technician> {
     return this.http.post<Technician>(this.apiUrl + '/technicians', data);
   }

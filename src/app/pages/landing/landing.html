@@ -1,0 +1,85 @@
+<div class="min-h-screen">
+  <header class="border-b border-slate-200 bg-white">
+    <nav class="mx-auto flex max-w-5xl items-center gap-4 px-4 py-4">
+      <span class="flex items-center gap-2 text-lg font-bold text-slate-900">
+        <span class="grid h-8 w-8 place-items-center rounded-lg bg-brand-500 text-white">⚡</span>
+        Apagón<span class="-ml-1.5 text-brand-600">Ya</span>
+      </span>
+
+      <div class="ml-auto flex items-center gap-2">
+        @if (auth.isLoggedIn()) {
+          <a [routerLink]="panel()" class="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+            Ir a mi panel
+          </a>
+        } @else {
+          <a routerLink="/login" class="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">
+            Entrar
+          </a>
+          <a routerLink="/registro" class="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+            Crear cuenta
+          </a>
+        }
+      </div>
+    </nav>
+  </header>
+
+  <main class="mx-auto max-w-5xl px-4">
+    <section class="py-16 text-center sm:py-24">
+      <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+        Reporta el corte, avisa a tu zona,<br class="hidden sm:block" />
+        exige respuestas
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-slate-600">
+        Los cortes de energía dejan sin clases, sin ventas y sin refrigeración a barrios enteros.
+        ApagónYa centraliza el reporte y el seguimiento comunitario de los cortes por zona.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        @if (auth.isLoggedIn()) {
+          <a [routerLink]="panel()" class="rounded-lg bg-brand-600 px-6 py-3 text-sm font-semibold text-white hover:bg-brand-700">
+            Ir a mi panel
+          </a>
+        } @else {
+          <a routerLink="/registro" class="rounded-lg bg-brand-600 px-6 py-3 text-sm font-semibold text-white hover:bg-brand-700">
+            Reportar un corte
+          </a>
+          <a routerLink="/login" class="rounded-lg border border-slate-300 px-6 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50">
+            Ya tengo cuenta
+          </a>
+        }
+      </div>
+    </section>
+
+    <section class="grid gap-5 pb-20 md:grid-cols-3">
+      <article class="rounded-xl border border-slate-200 bg-white p-6">
+        <p class="text-2xl">🏠</p>
+        <h2 class="mt-3 font-bold text-slate-900">Ciudadanos</h2>
+        <p class="mt-2 text-sm text-slate-600">
+          Reportan el corte con zona, dirección y hora, confirman el de sus vecinos con un
+          "a mí también" y consultan el historial de su sector.
+        </p>
+      </article>
+
+      <article class="rounded-xl border border-slate-200 bg-white p-6">
+        <p class="text-2xl">🔧</p>
+        <h2 class="mt-3 font-bold text-slate-900">Técnicos de zona</h2>
+        <p class="mt-2 text-sm text-slate-600">
+          Toman los reportes de su zona, los marcan en verificación o confirmados y registran
+          la causa y la hora exacta del restablecimiento.
+        </p>
+      </article>
+
+      <article class="rounded-xl border border-slate-200 bg-white p-6">
+        <p class="text-2xl">📊</p>
+        <h2 class="mt-3 font-bold text-slate-900">Administradores</h2>
+        <p class="mt-2 text-sm text-slate-600">
+          Gestionan zonas y técnicos, y ven patrones de recurrencia y tiempos de resolución
+          por sector para exigir rendición de cuentas.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white py-6 text-center text-sm text-slate-500">
+    ApagónYa · Programación Web (CCC205) · Q3 2026
+  </footer>
+</div>

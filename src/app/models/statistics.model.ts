@@ -32,4 +32,25 @@ export interface Statistics {
   reportsByZone: ZoneCount[];
   reportsByStatus: StatusCount[];
   technicianPerformance: TechnicianStats[];
+  weeklyTrend: TrendPoint[];
+  monthlyTrend: TrendPoint[];
+  resolutionsByCause: CauseStats[];
+}
+
+export interface StatisticsFilters {
+  zoneId?: string;
+  from?: string;
+  to?: string;
+}
+
+export interface TrendPoint {
+  period: string;
+  reported: number;
+  resolved: number;
+}
+
+export interface CauseStats {
+  cause: string;
+  total: number;
+  averageResolutionMinutes: number;
 }

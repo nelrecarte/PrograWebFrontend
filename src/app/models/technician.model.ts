@@ -7,7 +7,6 @@ export interface Technician {
   zoneName: string;
   isAvailable: boolean;
   isActive: boolean;
-  // Cuántos reportes abiertos tiene asignados
   activeReportCount: number;
 }
 

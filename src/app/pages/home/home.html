@@ -1,0 +1,46 @@
+<section class="mb-8 flex flex-wrap items-end justify-between gap-4">
+  <div>
+    <h1 class="text-2xl font-bold text-slate-900">Hola, {{ auth.displayName() }}</h1>
+    <p class="mt-1 text-sm text-slate-600">
+      @if (myZone(); as zone) {
+        Tu zona es <span class="font-medium text-slate-900">{{ zone.name }}</span
+        >.
+        @if (zone.activeReportId) {
+          Ahora mismo tiene un corte abierto.
+        } @else {
+          No hay cortes abiertos ahí.
+        }
+      } @else {
+        Todavía no elegiste tu zona.
+      }
+    </p>
+  </div>
+
+  <a
+    routerLink="/reportes/nuevo"
+    class="rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-brand-700"
+  >
+    Reportar un corte
+  </a>
+</section>
+
+@if (loading()) {
+  <p class="py-10 text-center text-sm text-slate-500">Cargando…</p>
+} @else {
+  <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
+    Cortes abiertos ({{ reports().length }})
+  </h2>
+
+  @if (reports().length === 0) {
+    <div class="rounded-xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
+      <p class="text-sm font-medium text-slate-700">No hay cortes abiertos</p>
+      <p class="mt-1 text-sm text-slate-500">Cuando alguien reporte uno, va a aparecer acá.</p>
+    </div>
+  } @else {
+    <div class="grid gap-4 sm:grid-cols-2">
+      @for (report of reports(); track report.id) {
+        <app-report-card [report]="report" (confirmed)="confirm($event)" />
+      }
+    </div>
+  }
+}
