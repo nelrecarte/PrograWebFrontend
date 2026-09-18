@@ -10,6 +10,7 @@ import { ReportCreateComponent } from './pages/report-create.component';
 import { ReportDetailComponent } from './pages/report-detail.component';
 import { ReportListComponent } from './pages/report-list.component';
 import { MainLayoutComponent } from './layout/main-layout.component';
+import { ZonesAdminComponent } from './pages/zones-admin.component';
 import { TechniciansAdminComponent } from './pages/technicians-admin.component';
 
 export const routes: Routes = [
@@ -34,6 +35,7 @@ export const routes: Routes = [
       // Para las pantallas que faltan, con su guard:
       // { path: 'admin', component: DashboardComponent, canActivate: [adminGuard] },
 
+      { path: 'admin/zonas', component: ZonesAdminComponent, canActivate: [adminGuard] },
       { path: 'sin-permiso', component: ForbiddenComponent },
     ],
   },
