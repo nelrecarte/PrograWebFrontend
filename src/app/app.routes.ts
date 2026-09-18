@@ -12,6 +12,8 @@ import { ReportListComponent } from './pages/report-list.component';
 import { MainLayoutComponent } from './layout/main-layout.component';
 import { ZonesAdminComponent } from './pages/zones-admin.component';
 import { TechniciansAdminComponent } from './pages/technicians-admin.component';
+import { ProfileComponent } from './pages/profile.component';
+import { UsersAdminComponent } from './pages/users-admin.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
@@ -31,6 +33,9 @@ export const routes: Routes = [
       { path: 'reportes/nuevo', component: ReportCreateComponent },
       { path: 'reportes/mios', component: MyReportsComponent },
       { path: 'reportes/:id', component: ReportDetailComponent },
+      // 3. dentro del array children, donde está el comentario de placeholder
+      { path: 'perfil', component: ProfileComponent },
+      { path: 'admin/usuarios', component: UsersAdminComponent, canActivate: [adminGuard] },
 
       // Para las pantallas que faltan, con su guard:
       // { path: 'admin', component: DashboardComponent, canActivate: [adminGuard] },
